@@ -12,4 +12,4 @@ QRP CW Transceiver
 * Keyer settings are saved in EEPROM
 * ~5W class C power amplifier
 * Has a S-meter and a SWR meter
-* Open-source firmware, hardware and 3D-printable enclosure
+* Open-source firmware, schematic and 3D-printable enclosure
