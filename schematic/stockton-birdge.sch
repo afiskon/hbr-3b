@@ -482,7 +482,7 @@ Wire Wire Line
 Wire Wire Line
 	3150 3300 3350 3300
 Text GLabel 2800 4700 0    50   Output ~ 0
-PWR_FED
+PWR_FWD
 Text GLabel 2800 3650 0    50   Output ~ 0
 PWR_REF
 Wire Wire Line
