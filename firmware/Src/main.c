@@ -113,9 +113,9 @@ const uint8_t eeprom_i2c_addr = (0x50 << 1);
 #define KEYER_CONFIG_EEPROM_ADDR        0x0000
 
 typedef enum {
-	CLAR_MODE_DISABLED = 0,
-	CLAR_MODE_RIT = 1,
-	CLAR_MODE_XIT = 2,
+    CLAR_MODE_DISABLED = 0,
+    CLAR_MODE_RIT = 1,
+    CLAR_MODE_XIT = 2,
 } ClarMode_t;
 
 bool lockMode = false;
@@ -132,9 +132,9 @@ int32_t sendTimeout = 0;
 bool isSending = false;
 
 typedef enum {
-	CW_SEND_NONE = 0,
-	CW_SEND_DIT = 1,
-	CW_SEND_DAH = 2,
+    CW_SEND_NONE = 0,
+    CW_SEND_DIT = 1,
+    CW_SEND_DAH = 2,
 } CwSend_t;
 
 CwSend_t lastSent = CW_SEND_NONE;
@@ -148,14 +148,14 @@ typedef struct {
 } KeyerConfig_t;
 
 KeyerConfig_t keyerConfig = {
-	.checksum = 0,
-	.straightKey = false,
-	.speedWPM = 19,
+    .checksum = 0,
+    .straightKey = false,
+    .speedWPM = 19,
 
-	// ditTimeMs = 60*1000/(50*WPM)
-	// where 50 is the length in dits of "PARIS "
-	// see https://morsecode.world/international/timing.html
-	.ditTimeMs = 63,
+    // ditTimeMs = 60*1000/(50*WPM)
+    // where 50 is the length in dits of "PARIS "
+    // see https://morsecode.world/international/timing.html
+    .ditTimeMs = 63,
 };
 
 bool inTransmitMode = false;
@@ -163,15 +163,15 @@ bool inCWTrainerMode = false;
 
 #define BUTTON_DEBOUNCE_TIME_MS 200
 typedef enum {
-	BUTTON_STATUS_PRESSED = 0,
-	BUTTON_STATUS_RELEASED = 1,
-	BUTTON_STATUS_DEBOUNCE = 2,
+    BUTTON_STATUS_PRESSED = 0,
+    BUTTON_STATUS_RELEASED = 1,
+    BUTTON_STATUS_DEBOUNCE = 2,
 } ButtonStatus_t;
 
 typedef enum {
-	USE_LPF_30 = 0,
-	USE_LPF_17 = 1,
-	USE_LPF_12 = 2,
+    USE_LPF_30 = 0,
+    USE_LPF_17 = 1,
+    USE_LPF_12 = 2,
 } UseLPF_t;
 
 typedef struct {
@@ -190,68 +190,68 @@ int32_t currentBand = 0; // default: 30m
 
 BandInfo_t bands[] = {
 /*
-	{
-		.minFreq  = 3500000,
-		.maxFreq  = 3570000,
-		.lastFreq = 3560000,
-		.lpf = USE_LPF_80,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
-	{
-		.minFreq  = 7000000,
-		.maxFreq  = 7040000,
-		.lastFreq = 7030000,
-		.lpf = USE_LPF_40,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
+    {
+        .minFreq  = 3500000,
+        .maxFreq  = 3570000,
+        .lastFreq = 3560000,
+        .lpf = USE_LPF_80,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
+    {
+        .minFreq  = 7000000,
+        .maxFreq  = 7040000,
+        .lastFreq = 7030000,
+        .lpf = USE_LPF_40,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
 */
-	{
-		.minFreq  = 10100000,
-		.maxFreq  = 10130000,
-		.lastFreq = 10116000,
-		.lpf = USE_LPF_30,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
+    {
+        .minFreq  = 10100000,
+        .maxFreq  = 10130000,
+        .lastFreq = 10116000,
+        .lpf = USE_LPF_30,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
 /*
-	{
-		.minFreq  = 14000000,
-		.maxFreq  = 14070000,
-		.lastFreq = 14060000,
-		.lpf = USE_LPF_20,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
+    {
+        .minFreq  = 14000000,
+        .maxFreq  = 14070000,
+        .lastFreq = 14060000,
+        .lpf = USE_LPF_20,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
 */
-	{
-		.minFreq  = 18068000,
-		.maxFreq  = 18095000,
-		.lastFreq = 18086000,
-		.lpf = USE_LPF_17,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
+    {
+        .minFreq  = 18068000,
+        .maxFreq  = 18095000,
+        .lastFreq = 18086000,
+        .lpf = USE_LPF_17,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
 /*
-	{
-		.minFreq  = 21000000,
-		.maxFreq  = 21070000,
-		.lastFreq = 21060000,
-		.lpf = USE_LPF_15,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
+    {
+        .minFreq  = 21000000,
+        .maxFreq  = 21070000,
+        .lastFreq = 21060000,
+        .lpf = USE_LPF_15,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
 */
-	{
-		.minFreq  = 24890000,
-		.maxFreq  = 24915000,
-		.lastFreq = 24906000,
-		.lpf = USE_LPF_12,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
+    {
+        .minFreq  = 24890000,
+        .maxFreq  = 24915000,
+        .lastFreq = 24906000,
+        .lpf = USE_LPF_12,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
 /*
-	{
-		.minFreq  = 28000000,
-		.maxFreq  = 28070000,
-		.lastFreq = 28060000,
-		.lpf = USE_LPF_10,
-		.txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
-	},
+    {
+        .minFreq  = 28000000,
+        .maxFreq  = 28070000,
+        .lastFreq = 28060000,
+        .lpf = USE_LPF_10,
+        .txDriveStrength = SI5351_DRIVE_STRENGTH_2MA,
+    },
 */
 };
 
@@ -267,9 +267,9 @@ void ADC_Select_Channel(uint32_t ch) {
 } 
 
 double ADC_ReadVoltage(uint32_t ch) {
-	ADC_Select_Channel(ch);
-	HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-	return ((double)HAL_ADC_GetValue(&hadc1))*3.3/4096.0;
+    ADC_Select_Channel(ch);
+    HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+    return ((double)HAL_ADC_GetValue(&hadc1))*3.3/4096.0;
 }
 
 // http://en.wikipedia.org/wiki/Jenkins_hash_function
@@ -334,296 +334,296 @@ void saveKeyerConfig() {
 }
 
 void changeKeyerSpeed(int32_t delta) {
-	keyerConfig.speedWPM += delta;
-	if(keyerConfig.speedWPM < 10) {
-		keyerConfig.speedWPM = 9;
-		keyerConfig.straightKey = true;
-		keyerConfig.ditTimeMs = 60*1000/(50*15); // as for 15 WPM
-	} else {
-		keyerConfig.straightKey = false;
-		if(keyerConfig.speedWPM > 30) {
-			keyerConfig.speedWPM = 30;
-		}
+    keyerConfig.speedWPM += delta;
+    if(keyerConfig.speedWPM < 10) {
+        keyerConfig.speedWPM = 9;
+        keyerConfig.straightKey = true;
+        keyerConfig.ditTimeMs = 60*1000/(50*15); // as for 15 WPM
+    } else {
+        keyerConfig.straightKey = false;
+        if(keyerConfig.speedWPM > 30) {
+            keyerConfig.speedWPM = 30;
+        }
 
-		keyerConfig.ditTimeMs = 60*1000/(50*keyerConfig.speedWPM);
-	}
+        keyerConfig.ditTimeMs = 60*1000/(50*keyerConfig.speedWPM);
+    }
 }
 
 void SetupCLK(uint8_t output, int32_t Fclk, si5351DriveStrength_t driveStrength) {
-	static bool pllSetupDone = false;
-	si5351PLLConfig_t pll_conf;
-	si5351OutputConfig_t out_conf;
+    static bool pllSetupDone = false;
+    si5351PLLConfig_t pll_conf;
+    si5351OutputConfig_t out_conf;
 
-	si5351_Calc(Fclk, &pll_conf, &out_conf);
-	if(!pllSetupDone) {
-		si5351_SetupPLL(SI5351_PLL_A, &pll_conf);
-		pllSetupDone = true;
-	}
-	si5351_SetupOutput(output, SI5351_PLL_A, driveStrength, &out_conf);
+    si5351_Calc(Fclk, &pll_conf, &out_conf);
+    if(!pllSetupDone) {
+        si5351_SetupPLL(SI5351_PLL_A, &pll_conf);
+        pllSetupDone = true;
+    }
+    si5351_SetupOutput(output, SI5351_PLL_A, driveStrength, &out_conf);
 }
 
 void enableTx(bool enable) {
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, enable ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, enable ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 void changeFrequency(int32_t delta, bool force) {
-	static int32_t prevFvfo = 0;
+    static int32_t prevFvfo = 0;
 
-	if((!force) && lockMode) {
-		return;
-	}
+    if((!force) && lockMode) {
+        return;
+    }
 
-	if(fastMode) {
-		delta *= 10;
-	}
-	bands[currentBand].lastFreq += 100*delta;
-	if(fastMode && (delta != 0)) {
-		bands[currentBand].lastFreq -= bands[currentBand].lastFreq % 1000;
-	}
+    if(fastMode) {
+        delta *= 10;
+    }
+    bands[currentBand].lastFreq += 100*delta;
+    if(fastMode && (delta != 0)) {
+        bands[currentBand].lastFreq -= bands[currentBand].lastFreq % 1000;
+    }
 
-	if(bands[currentBand].lastFreq < bands[currentBand].minFreq) {
-		bands[currentBand].lastFreq = bands[currentBand].minFreq;
-	} else if(bands[currentBand].lastFreq > bands[currentBand].maxFreq) {
-		bands[currentBand].lastFreq = bands[currentBand].maxFreq;
-	}
+    if(bands[currentBand].lastFreq < bands[currentBand].minFreq) {
+        bands[currentBand].lastFreq = bands[currentBand].minFreq;
+    } else if(bands[currentBand].lastFreq > bands[currentBand].maxFreq) {
+        bands[currentBand].lastFreq = bands[currentBand].maxFreq;
+    }
 
-	Fvfo = bands[currentBand].lastFreq + XtalFilterCenterFrequency;
-	if(clarMode == CLAR_MODE_RIT) {
-		Fvfo += clarOffset;
-	}
+    Fvfo = bands[currentBand].lastFreq + XtalFilterCenterFrequency;
+    if(clarMode == CLAR_MODE_RIT) {
+        Fvfo += clarOffset;
+    }
 
-	if(force || (Fvfo != prevFvfo)) {
-		SetupCLK(CH_VFO, Fvfo, SI5351_DRIVE_STRENGTH_4MA);	
-	}
+    if(force || (Fvfo != prevFvfo)) {
+        SetupCLK(CH_VFO, Fvfo, SI5351_DRIVE_STRENGTH_4MA);
+    }
 
-	prevFvfo = Fvfo;
+    prevFvfo = Fvfo;
 }
 
 void displayKeyerSettings() {
-	char buff[16];
-	if(keyerConfig.straightKey) {
-		LCD_Goto(0, 0);
-		LCD_SendString("SPEED --");
-		LCD_Goto(1, 0);
-		LCD_SendString("STRAIGHT");
-	} else {
-		snprintf(buff, sizeof(buff), "SPEED %02ld", keyerConfig.speedWPM);
-		LCD_Goto(0, 0);
-		LCD_SendString(buff);
-		LCD_Goto(1, 0);
-		LCD_SendString("IAMBIC  ");
-	}
+    char buff[16];
+    if(keyerConfig.straightKey) {
+        LCD_Goto(0, 0);
+        LCD_SendString("SPEED --");
+        LCD_Goto(1, 0);
+        LCD_SendString("STRAIGHT");
+    } else {
+        snprintf(buff, sizeof(buff), "SPEED %02ld", keyerConfig.speedWPM);
+        LCD_Goto(0, 0);
+        LCD_SendString(buff);
+        LCD_Goto(1, 0);
+        LCD_SendString("IAMBIC  ");
+    }
 }
 
 void displayFrequency() {
-	char buff[16];
-	snprintf(buff, sizeof(buff), "%02ld.%03ld.%01ld", 
-		bands[currentBand].lastFreq / 1000000,
-		(bands[currentBand].lastFreq % 1000000) / 1000,
-		(bands[currentBand].lastFreq % 1000) / 100);
+    char buff[16];
+    snprintf(buff, sizeof(buff), "%02ld.%03ld.%01ld",
+        bands[currentBand].lastFreq / 1000000,
+        (bands[currentBand].lastFreq % 1000000) / 1000,
+        (bands[currentBand].lastFreq % 1000) / 100);
 
     LCD_Goto(0, 0);
     LCD_SendString(buff);
 }
 
 void displaySMeterOrMode(bool force) {
-	static const char* prevSValue = NULL;
-	static uint32_t lastSMeterUpdateTime = 0;
-	// don't forget to add '-u _printf_float' to LDFLAGS
-	char buff[16];
-	
-	if(force) {
-		LCD_Goto(1, 0);
-		if(fastMode) {
-			LCD_SendString("= FAST =");
-			return;
-		} else if(lockMode) {
-			LCD_SendString("= LOCK =");
-			return;
-		} else if(bandMode) {
-			LCD_SendString("= BAND =");
-			return;
-		} else if(clarMode != CLAR_MODE_DISABLED) {
-			snprintf(buff, sizeof(buff), "%s%s%04d",
-				clarMode == CLAR_MODE_RIT ? "RIT" : "XIT",
-				clarOffset < 0 ? "-" : "+",
-				abs(clarOffset));
-			LCD_SendString(buff);
-			return;
-		}
-	}
+    static const char* prevSValue = NULL;
+    static uint32_t lastSMeterUpdateTime = 0;
+    // don't forget to add '-u _printf_float' to LDFLAGS
+    char buff[16];
 
-	uint32_t tstamp = HAL_GetTick();
-	if(force || (tstamp - lastSMeterUpdateTime > 250)) {
-		const char* sValue = NULL;
-		double voltage = ADC_ReadVoltage(ADC_CHANNEL_2);
+    if(force) {
+        LCD_Goto(1, 0);
+        if(fastMode) {
+            LCD_SendString("= FAST =");
+            return;
+        } else if(lockMode) {
+            LCD_SendString("= LOCK =");
+            return;
+        } else if(bandMode) {
+            LCD_SendString("= BAND =");
+            return;
+        } else if(clarMode != CLAR_MODE_DISABLED) {
+            snprintf(buff, sizeof(buff), "%s%s%04d",
+                clarMode == CLAR_MODE_RIT ? "RIT" : "XIT",
+                clarOffset < 0 ? "-" : "+",
+                abs(clarOffset));
+            LCD_SendString(buff);
+            return;
+        }
+    }
 
-		if(voltage <= 0.03) {
-			sValue = "S0      ";
-		} else if(voltage <= 0.04) {
-			sValue = "S3\x02     ";
-		} else if(voltage <= 0.06) {
-			sValue = "S4\x02     ";
-		} else if(voltage <= 0.10) {
-			sValue = "S5\x02\x03    ";
-		} else if(voltage <= 0.20) {
-			sValue = "S6\x02\x03\x04   ";
-		} else if(voltage <= 0.45) {
-			sValue = "S7\x02\x03\x04\x05  ";
-		} else if(voltage <= 0.95) {
-			sValue = "S8\x02\x03\x04\x05\x06 ";
-		} else if(voltage <= 2.10) {
-			sValue = "S9\x02\x03\x04\x05\x06\x07";
-		} else {
-			sValue = "S+\x02\x03\x04\x05\x06\x07";
-		}
+    uint32_t tstamp = HAL_GetTick();
+    if(force || (tstamp - lastSMeterUpdateTime > 250)) {
+        const char* sValue = NULL;
+        double voltage = ADC_ReadVoltage(ADC_CHANNEL_2);
 
-		if(force || (prevSValue != sValue)) {
-			LCD_Goto(1, 0);
-			LCD_SendString(sValue);
-		}
+        if(voltage <= 0.03) {
+            sValue = "S0      ";
+        } else if(voltage <= 0.04) {
+            sValue = "S3\x02     ";
+        } else if(voltage <= 0.06) {
+            sValue = "S4\x02     ";
+        } else if(voltage <= 0.10) {
+            sValue = "S5\x02\x03    ";
+        } else if(voltage <= 0.20) {
+            sValue = "S6\x02\x03\x04   ";
+        } else if(voltage <= 0.45) {
+            sValue = "S7\x02\x03\x04\x05  ";
+        } else if(voltage <= 0.95) {
+            sValue = "S8\x02\x03\x04\x05\x06 ";
+        } else if(voltage <= 2.10) {
+            sValue = "S9\x02\x03\x04\x05\x06\x07";
+        } else {
+            sValue = "S+\x02\x03\x04\x05\x06\x07";
+        }
 
-		prevSValue = sValue;
-		lastSMeterUpdateTime = tstamp;
-	}
+        if(force || (prevSValue != sValue)) {
+            LCD_Goto(1, 0);
+            LCD_SendString(sValue);
+        }
+
+        prevSValue = sValue;
+        lastSMeterUpdateTime = tstamp;
+    }
 }
 
 void keyDown() {
-	// CW tone ON
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_SET);
+    // CW tone ON
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_SET);
 }
 
 void keyUp() {
-	// CW tone OFF
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
+    // CW tone OFF
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
 }
 
 void switchLPFs(UseLPF_t lpf) {
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, lpf == USE_LPF_30 ? GPIO_PIN_SET : GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, lpf == USE_LPF_17 ? GPIO_PIN_SET : GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, lpf == USE_LPF_12 ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, lpf == USE_LPF_30 ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, lpf == USE_LPF_17 ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, lpf == USE_LPF_12 ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 void changeBand(int32_t delta) {
-	currentBand += delta;
-	while(currentBand < 0) {
-		currentBand += sizeof(bands)/sizeof(bands[0]);
-	}
-	currentBand %= sizeof(bands)/sizeof(bands[0]);
+    currentBand += delta;
+    while(currentBand < 0) {
+        currentBand += sizeof(bands)/sizeof(bands[0]);
+    }
+    currentBand %= sizeof(bands)/sizeof(bands[0]);
 
-	switchLPFs(bands[currentBand].lpf);
-	changeFrequency(0, false);
-	si5351_EnableOutputs(1 << CH_VFO);
-	displayFrequency();
+    switchLPFs(bands[currentBand].lpf);
+    changeFrequency(0, false);
+    si5351_EnableOutputs(1 << CH_VFO);
+    displayFrequency();
 }
 
 void enterCWTrainerMode() {
-	if(inCWTrainerMode) {
-		return;
-	}
+    if(inCWTrainerMode) {
+        return;
+    }
 
-	inCWTrainerMode = true;
+    inCWTrainerMode = true;
 }
 
 void leaveCWTrainerMode() {
-	if(!inCWTrainerMode) {
-		return;
-	}
+    if(!inCWTrainerMode) {
+        return;
+    }
 
-	inCWTrainerMode = false;
+    inCWTrainerMode = false;
 }
 
 void ensureTransmitMode() {
-	if(inTransmitMode) {
-		return;
-	}
+    if(inTransmitMode) {
+        return;
+    }
 
-	int32_t targetFrequency = bands[currentBand].lastFreq;
-	if(clarMode == CLAR_MODE_XIT) {
-		targetFrequency += clarOffset;
-	}
+    int32_t targetFrequency = bands[currentBand].lastFreq;
+    if(clarMode == CLAR_MODE_XIT) {
+        targetFrequency += clarOffset;
+    }
 
-	SetupCLK(CH_CW, targetFrequency, bands[currentBand].txDriveStrength);
-	si5351_EnableOutputs(1 << CH_CW);
+    SetupCLK(CH_CW, targetFrequency, bands[currentBand].txDriveStrength);
+    si5351_EnableOutputs(1 << CH_CW);
 
-	enableTx(true);
+    enableTx(true);
 
-	LCD_Goto(1, 0);
-	LCD_SendString("SWR  ---");
+    LCD_Goto(1, 0);
+    LCD_SendString("SWR  ---");
 
-	inTransmitMode = true;
+    inTransmitMode = true;
 }
 
 void ensureReceiveMode() {
-	if(!inTransmitMode) {
-		return;
-	}
-	enableTx(false);
+    if(!inTransmitMode) {
+        return;
+    }
+    enableTx(false);
 
-	// Restore the original VFO
-	changeFrequency(0, true);
-	si5351_EnableOutputs(1 << CH_VFO);
-	displaySMeterOrMode(true);
-	inTransmitMode = false;
+    // Restore the original VFO
+    changeFrequency(0, true);
+    si5351_EnableOutputs(1 << CH_VFO);
+    displaySMeterOrMode(true);
+    inTransmitMode = false;
 }
 
 ButtonStatus_t buttonPressed(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, uint32_t* lastPressed) {
-	if(HAL_GPIO_ReadPin(GPIOx, GPIO_Pin) == GPIO_PIN_RESET) {
-		uint32_t now = HAL_GetTick();
-		if(now - *lastPressed > BUTTON_DEBOUNCE_TIME_MS) {
-			*lastPressed = now;
-			return BUTTON_STATUS_PRESSED;
-		} else {
-			return BUTTON_STATUS_DEBOUNCE;
-		}
-	}
-	return BUTTON_STATUS_RELEASED;
+    if(HAL_GPIO_ReadPin(GPIOx, GPIO_Pin) == GPIO_PIN_RESET) {
+        uint32_t now = HAL_GetTick();
+        if(now - *lastPressed > BUTTON_DEBOUNCE_TIME_MS) {
+            *lastPressed = now;
+            return BUTTON_STATUS_PRESSED;
+        } else {
+            return BUTTON_STATUS_DEBOUNCE;
+        }
+    }
+    return BUTTON_STATUS_RELEASED;
 }
 
 bool buttonDitPressed() {
-	return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12) == GPIO_PIN_RESET);
+    return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12) == GPIO_PIN_RESET);
 }
 
 bool buttonDahPressed() {
-	return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13) == GPIO_PIN_RESET);
+    return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13) == GPIO_PIN_RESET);
 }
 
 bool switchRitMode() {
-	return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4) == GPIO_PIN_RESET);
+    return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4) == GPIO_PIN_RESET);
 }
 
 ButtonStatus_t buttonBandPressed() {
-	static uint32_t lastPressed = 0;
-	return buttonPressed(GPIOB, GPIO_PIN_14, &lastPressed);
+    static uint32_t lastPressed = 0;
+    return buttonPressed(GPIOB, GPIO_PIN_14, &lastPressed);
 }
 
 ButtonStatus_t buttonFastPressed() {
-	static uint32_t lastPressed = 0;
-	return buttonPressed(GPIOB, GPIO_PIN_15, &lastPressed);
+    static uint32_t lastPressed = 0;
+    return buttonPressed(GPIOB, GPIO_PIN_15, &lastPressed);
 }
 
 ButtonStatus_t buttonLockPressed() {
-	static uint32_t lastPressed = 0;
-	return buttonPressed(GPIOB, GPIO_PIN_10, &lastPressed);
+    static uint32_t lastPressed = 0;
+    return buttonPressed(GPIOB, GPIO_PIN_10, &lastPressed);
 }
 
 ButtonStatus_t buttonClarPressed() {
-	static uint32_t lastPressed = 0;
-	return buttonPressed(GPIOB, GPIO_PIN_1, &lastPressed);
+    static uint32_t lastPressed = 0;
+    return buttonPressed(GPIOB, GPIO_PIN_1, &lastPressed);
 }
 
 ButtonStatus_t buttonSpotPressed() {
-	// for SPOT there is no debounce
-	if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
-		return BUTTON_STATUS_PRESSED;
-	} else {
-		return BUTTON_STATUS_RELEASED;
-	}
+    // for SPOT there is no debounce
+    if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) {
+        return BUTTON_STATUS_PRESSED;
+    } else {
+        return BUTTON_STATUS_RELEASED;
+    }
 }
 
 ButtonStatus_t buttonKeyerPressed() {
-	static uint32_t lastPressed = 0;
-	return buttonPressed(GPIOA, GPIO_PIN_7, &lastPressed);
+    static uint32_t lastPressed = 0;
+    return buttonPressed(GPIOA, GPIO_PIN_7, &lastPressed);
 }
 
 // `straightKeyerKeyIsDown` is used to avoid calling keyUp()/keyDown() if we did it already.
@@ -631,345 +631,345 @@ ButtonStatus_t buttonKeyerPressed() {
 bool straightKeyerKeyIsDown;
 
 void initStraightKeyer() {
-	straightKeyerKeyIsDown = false;
+    straightKeyerKeyIsDown = false;
 }
 
 void processStraightKeyerLogic(bool pressed) {
-	if(pressed) {
-		if(!straightKeyerKeyIsDown) {
-			keyDown();
-			straightKeyerKeyIsDown = true;
-		}
-	} else if(straightKeyerKeyIsDown) {
-		keyUp();
-		straightKeyerKeyIsDown = false;
-	}
+    if(pressed) {
+        if(!straightKeyerKeyIsDown) {
+            keyDown();
+            straightKeyerKeyIsDown = true;
+        }
+    } else if(straightKeyerKeyIsDown) {
+        keyUp();
+        straightKeyerKeyIsDown = false;
+    }
 }
 
 void initIambicKeyer() {
-	// iambic keyer doesn't need to init anything
+    // iambic keyer doesn't need to init anything
 }
 
 void processIambicKeyerLogic(bool ditPressed, bool dahPressed) {
-	int32_t now = HAL_GetTick();
+    int32_t now = HAL_GetTick();
 
-	if(isSending && (now >= sendFinish)) {
-		keyUp();
-		isSending = false;
-	}
+    if(isSending && (now >= sendFinish)) {
+        keyUp();
+        isSending = false;
+    }
 
-	if(nextSend == CW_SEND_NONE) {
-		if(ditPressed && (lastSent == CW_SEND_DAH)) {
-			nextSend = CW_SEND_DIT;
-		} else if(dahPressed && (lastSent == CW_SEND_DIT)) {
-			nextSend = CW_SEND_DAH;
-		} else if(now > keyReadTimeout) {
-			if(ditPressed) {
-				nextSend = CW_SEND_DIT;
-			} else if (dahPressed) {
-				nextSend = CW_SEND_DAH;
-			}
-		}
-	}
+    if(nextSend == CW_SEND_NONE) {
+        if(ditPressed && (lastSent == CW_SEND_DAH)) {
+            nextSend = CW_SEND_DIT;
+        } else if(dahPressed && (lastSent == CW_SEND_DIT)) {
+            nextSend = CW_SEND_DAH;
+        } else if(now > keyReadTimeout) {
+            if(ditPressed) {
+                nextSend = CW_SEND_DIT;
+            } else if (dahPressed) {
+                nextSend = CW_SEND_DAH;
+            }
+        }
+    }
 
-	if((now > sendTimeout) && (nextSend != CW_SEND_NONE)) {
-		if(nextSend == CW_SEND_DIT) {
-			sendFinish = now + keyerConfig.ditTimeMs;
-			keyReadTimeout = now + keyerConfig.ditTimeMs*2;
-		} else if(nextSend == CW_SEND_DAH) {
-			sendFinish = now + keyerConfig.ditTimeMs*3;
-			keyReadTimeout = now + keyerConfig.ditTimeMs*3;
-		}
+    if((now > sendTimeout) && (nextSend != CW_SEND_NONE)) {
+        if(nextSend == CW_SEND_DIT) {
+            sendFinish = now + keyerConfig.ditTimeMs;
+            keyReadTimeout = now + keyerConfig.ditTimeMs*2;
+        } else if(nextSend == CW_SEND_DAH) {
+            sendFinish = now + keyerConfig.ditTimeMs*3;
+            keyReadTimeout = now + keyerConfig.ditTimeMs*3;
+        }
 
-		lastSent = nextSend;
-		nextSend = CW_SEND_NONE;
-		sendStart = now;
-		sendTimeout = sendFinish + keyerConfig.ditTimeMs;
-		isSending = true;
-		keyDown();
-	}
+        lastSent = nextSend;
+        nextSend = CW_SEND_NONE;
+        sendStart = now;
+        sendTimeout = sendFinish + keyerConfig.ditTimeMs;
+        isSending = true;
+        keyDown();
+    }
 }
 
 int32_t getDelta(TIM_HandleTypeDef* htim, int32_t *prevCounter, int32_t mult, int32_t div) {
-	int32_t currCounter = __HAL_TIM_GET_COUNTER(htim);
-	currCounter = mult*(currCounter / div);
-	currCounter = 32767 - ((currCounter-1) & 0xFFFF) / 2;
-	if(currCounter > 32768/2) {
-		// convert ... 32766, 32767, 0, 1, 2 ... into:
-		//               ... -2, -1, 0, 1, 2 ...
-		// this simplifies `delta` calculation
-		currCounter = currCounter-32768;
-	}
+    int32_t currCounter = __HAL_TIM_GET_COUNTER(htim);
+    currCounter = mult*(currCounter / div);
+    currCounter = 32767 - ((currCounter-1) & 0xFFFF) / 2;
+    if(currCounter > 32768/2) {
+        // convert ... 32766, 32767, 0, 1, 2 ... into:
+        //               ... -2, -1, 0, 1, 2 ...
+        // this simplifies `delta` calculation
+        currCounter = currCounter-32768;
+    }
 
-	if(currCounter != *prevCounter) {
-		int32_t delta = *prevCounter-currCounter;
-		*prevCounter = currCounter;
+    if(currCounter != *prevCounter) {
+        int32_t delta = *prevCounter-currCounter;
+        *prevCounter = currCounter;
 
-		// debounce or skip counter overflow
-		if((delta > -10) && (delta < 10)) {
-			return delta;
-		}
-	}
+        // debounce or skip counter overflow
+        if((delta > -10) && (delta < 10)) {
+            return delta;
+        }
+    }
 
-	return 0;
+    return 0;
 }
 
 void loopKeyer() {
-	uint32_t CWTrainerModeEnterTime = 0;
-	int32_t prevCounter = 0;
-	displayKeyerSettings();
-	// read the initial counter value
-	(void)getDelta(&htim2, &prevCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+    uint32_t CWTrainerModeEnterTime = 0;
+    int32_t prevCounter = 0;
+    displayKeyerSettings();
+    // read the initial counter value
+    (void)getDelta(&htim2, &prevCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
 
-	for(;;) {
-		bool ditPressed = buttonDitPressed();
-		bool dahPressed = buttonDahPressed();
+    for(;;) {
+        bool ditPressed = buttonDitPressed();
+        bool dahPressed = buttonDahPressed();
 
-		if((ditPressed || dahPressed)) {
-			CWTrainerModeEnterTime = HAL_GetTick();
-			if(!inCWTrainerMode) {
-				enterCWTrainerMode();
-				if(keyerConfig.straightKey) {
-					initStraightKeyer();
-				} else {
-					initIambicKeyer();
-				}
-			}
-		} else {
-			uint32_t tstamp = HAL_GetTick();
-			if(tstamp - CWTrainerModeEnterTime > keyerConfig.ditTimeMs*10) {
-				leaveCWTrainerMode();
-			}
-		}
+        if((ditPressed || dahPressed)) {
+            CWTrainerModeEnterTime = HAL_GetTick();
+            if(!inCWTrainerMode) {
+                enterCWTrainerMode();
+                if(keyerConfig.straightKey) {
+                    initStraightKeyer();
+                } else {
+                    initIambicKeyer();
+                }
+            }
+        } else {
+            uint32_t tstamp = HAL_GetTick();
+            if(tstamp - CWTrainerModeEnterTime > keyerConfig.ditTimeMs*10) {
+                leaveCWTrainerMode();
+            }
+        }
 
-		if(inCWTrainerMode) {
-			if(keyerConfig.straightKey) {
-				processStraightKeyerLogic(ditPressed);
-			} else {
-				processIambicKeyerLogic(ditPressed, dahPressed);
-			}
-		}
+        if(inCWTrainerMode) {
+            if(keyerConfig.straightKey) {
+                processStraightKeyerLogic(ditPressed);
+            } else {
+                processIambicKeyerLogic(ditPressed, dahPressed);
+            }
+        }
 
-		int32_t delta = getDelta(&htim2, &prevCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-		if(delta != 0) {
-			// reset the keyer logic if dit or dah is presset
-			leaveCWTrainerMode();
-			keyUp();
-			changeKeyerSpeed(delta);
-			displayKeyerSettings();
-		}
+        int32_t delta = getDelta(&htim2, &prevCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+        if(delta != 0) {
+            // reset the keyer logic if dit or dah is presset
+            leaveCWTrainerMode();
+            keyUp();
+            changeKeyerSpeed(delta);
+            displayKeyerSettings();
+        }
 
-		if(buttonKeyerPressed() == BUTTON_STATUS_PRESSED) {
-			break;
-		}
+        if(buttonKeyerPressed() == BUTTON_STATUS_PRESSED) {
+            break;
+        }
 
-		HAL_Delay(5);
-	}
+        HAL_Delay(5);
+    }
 
-	leaveCWTrainerMode();
-	saveKeyerConfig();
-	displayFrequency();
-	displaySMeterOrMode(true);
+    leaveCWTrainerMode();
+    saveKeyerConfig();
+    displayFrequency();
+    displaySMeterOrMode(true);
 }
 
 void loopBand() {
-	ClarMode_t prevClarMode = CLAR_MODE_DISABLED;
-	int32_t prevCounter = 0;
+    ClarMode_t prevClarMode = CLAR_MODE_DISABLED;
+    int32_t prevCounter = 0;
 
-	bandMode = true;
-	displaySMeterOrMode(true);
+    bandMode = true;
+    displaySMeterOrMode(true);
 
-	// read the initial counter value
-	(void)getDelta(&htim1, &prevCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+    // read the initial counter value
+    (void)getDelta(&htim1, &prevCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
 
-	for(;;) {
-		if(clarMode != CLAR_MODE_DISABLED) {
-			if(switchRitMode()) {
-				clarMode = CLAR_MODE_RIT;
-			} else {
-				clarMode = CLAR_MODE_XIT;
-			}
+    for(;;) {
+        if(clarMode != CLAR_MODE_DISABLED) {
+            if(switchRitMode()) {
+                clarMode = CLAR_MODE_RIT;
+            } else {
+                clarMode = CLAR_MODE_XIT;
+            }
 
-			if(clarMode != prevClarMode) {
-				displaySMeterOrMode(true);
-				changeFrequency(0, false);
-				prevClarMode = clarMode;
-			}
-		}
+            if(clarMode != prevClarMode) {
+                displaySMeterOrMode(true);
+                changeFrequency(0, false);
+                prevClarMode = clarMode;
+            }
+        }
 
-		int32_t delta = getDelta(&htim1, &prevCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
-		if(delta != 0) {
-			changeBand(delta);
-		}
+        int32_t delta = getDelta(&htim1, &prevCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+        if(delta != 0) {
+            changeBand(delta);
+        }
 
-		if(buttonBandPressed() == BUTTON_STATUS_PRESSED) {
-			break;
-		}
+        if(buttonBandPressed() == BUTTON_STATUS_PRESSED) {
+            break;
+        }
 
-		HAL_Delay(5);
-	}
+        HAL_Delay(5);
+    }
 
-	bandMode = false;
-	displaySMeterOrMode(true);
+    bandMode = false;
+    displaySMeterOrMode(true);
 }
 
 void loopMain() {
-	static int32_t prevMainCounter = 0;
-	static int32_t prevMultiCounter = 0;
-	static uint32_t transmitModeEnterTime = 0;
-	static uint32_t lastSWRCheckTime = 0;
-	static double lastSWRValue = 0.0;
-	static bool prevClarModeRit = false;
-	bool ditPressed = buttonDitPressed();
-	bool dahPressed = buttonDahPressed();
+    static int32_t prevMainCounter = 0;
+    static int32_t prevMultiCounter = 0;
+    static uint32_t transmitModeEnterTime = 0;
+    static uint32_t lastSWRCheckTime = 0;
+    static double lastSWRValue = 0.0;
+    static bool prevClarModeRit = false;
+    bool ditPressed = buttonDitPressed();
+    bool dahPressed = buttonDahPressed();
 
-	if(ditPressed || dahPressed) {
-		transmitModeEnterTime = HAL_GetTick();
-		if(!inTransmitMode) {
-			ensureTransmitMode();
-			lastSWRCheckTime = 0;
-			lastSWRValue = 0.0;
+    if(ditPressed || dahPressed) {
+        transmitModeEnterTime = HAL_GetTick();
+        if(!inTransmitMode) {
+            ensureTransmitMode();
+            lastSWRCheckTime = 0;
+            lastSWRValue = 0.0;
 
-			if(keyerConfig.straightKey) {
-				initStraightKeyer();
-			} else {
-				initIambicKeyer();
-			}
-		}
-	} else {
-		uint32_t tstamp = HAL_GetTick();
-		if((tstamp - transmitModeEnterTime > keyerConfig.ditTimeMs*15) && (inTransmitMode)) {
-			ensureReceiveMode();
-			// discard any changes in counters
-			(void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
-			(void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-		}
-	}
+            if(keyerConfig.straightKey) {
+                initStraightKeyer();
+            } else {
+                initIambicKeyer();
+            }
+        }
+    } else {
+        uint32_t tstamp = HAL_GetTick();
+        if((tstamp - transmitModeEnterTime > keyerConfig.ditTimeMs*15) && (inTransmitMode)) {
+            ensureReceiveMode();
+            // discard any changes in counters
+            (void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+            (void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+        }
+    }
 
-	if(inTransmitMode) {
-		if(keyerConfig.straightKey) {
-			processStraightKeyerLogic(ditPressed);
-		} else {
-			processIambicKeyerLogic(ditPressed, dahPressed);
-		}
+    if(inTransmitMode) {
+        if(keyerConfig.straightKey) {
+            processStraightKeyerLogic(ditPressed);
+        } else {
+            processIambicKeyerLogic(ditPressed, dahPressed);
+        }
 
-		uint32_t tstamp = HAL_GetTick();
-		if(tstamp - lastSWRCheckTime > 100) {
-			double v_fwd = ADC_ReadVoltage(ADC_CHANNEL_0);
-			if(v_fwd > 0) {
-				double v_ref = ADC_ReadVoltage(ADC_CHANNEL_1);
-				double ratio = v_ref / v_fwd;
-				double swr = (1+ratio)/(1-ratio);
+        uint32_t tstamp = HAL_GetTick();
+        if(tstamp - lastSWRCheckTime > 100) {
+            double v_fwd = ADC_ReadVoltage(ADC_CHANNEL_0);
+            if(v_fwd > 0) {
+                double v_ref = ADC_ReadVoltage(ADC_CHANNEL_1);
+                double ratio = v_ref / v_fwd;
+                double swr = (1+ratio)/(1-ratio);
 
-				if(abs(lastSWRValue - swr) > 0.2) {
-					LCD_Goto(1, 5);
-					if(swr >= 10) {
-						LCD_SendString("10+");
-					} else {
-						char buff[8];
-						snprintf(buff, sizeof(buff), "%.1f", swr);
-						LCD_SendString(buff);
-    				}
+                if(abs(lastSWRValue - swr) > 0.2) {
+                    LCD_Goto(1, 5);
+                    if(swr >= 10) {
+                        LCD_SendString("10+");
+                    } else {
+                        char buff[8];
+                        snprintf(buff, sizeof(buff), "%.1f", swr);
+                        LCD_SendString(buff);
+                    }
 
-					lastSWRValue = swr;
-				}
+                    lastSWRValue = swr;
+                }
 
-				lastSWRCheckTime = tstamp;
-			}
-		}
-	} else {
-		int32_t delta = getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
-		if(delta != 0) {
-			changeFrequency(delta, false); // will do nothing in LOCK mode
-			displayFrequency();
-		}
+                lastSWRCheckTime = tstamp;
+            }
+        }
+    } else {
+        int32_t delta = getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+        if(delta != 0) {
+            changeFrequency(delta, false); // will do nothing in LOCK mode
+            displayFrequency();
+        }
 
-		if(buttonSpotPressed() == BUTTON_STATUS_PRESSED) {
-			keyDown();
-		} else {
-			keyUp();
-		}
+        if(buttonSpotPressed() == BUTTON_STATUS_PRESSED) {
+            keyDown();
+        } else {
+            keyUp();
+        }
 
-		bool currClarModeRit = switchRitMode();
-		if((clarMode != CLAR_MODE_DISABLED) && (currClarModeRit != prevClarModeRit)) {
-			if(currClarModeRit) {
-				clarMode = CLAR_MODE_RIT;
-			} else {
-				clarMode = CLAR_MODE_XIT;
-			}
-			changeFrequency(0, false);
-			displaySMeterOrMode(true);
-			prevClarModeRit = currClarModeRit;
-		}
+        bool currClarModeRit = switchRitMode();
+        if((clarMode != CLAR_MODE_DISABLED) && (currClarModeRit != prevClarModeRit)) {
+            if(currClarModeRit) {
+                clarMode = CLAR_MODE_RIT;
+            } else {
+                clarMode = CLAR_MODE_XIT;
+            }
+            changeFrequency(0, false);
+            displaySMeterOrMode(true);
+            prevClarModeRit = currClarModeRit;
+        }
 
-		if((clarMode != CLAR_MODE_DISABLED) && (!fastMode) && (!lockMode)) {
-			delta = getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-			if(delta != 0) {
-				clarOffset = clarOffset + delta*50;
-				if(clarOffset < -3000) {
-					clarOffset = -3000;
-				} else if (clarOffset > 3000) {
-					clarOffset = 3000;
-				}
+        if((clarMode != CLAR_MODE_DISABLED) && (!fastMode) && (!lockMode)) {
+            delta = getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+            if(delta != 0) {
+                clarOffset = clarOffset + delta*50;
+                if(clarOffset < -3000) {
+                    clarOffset = -3000;
+                } else if (clarOffset > 3000) {
+                    clarOffset = 3000;
+                }
 
-				if(clarMode == CLAR_MODE_RIT) {
-					changeFrequency(0, false);
-				}
-				displaySMeterOrMode(true);
-			}
-		}
+                if(clarMode == CLAR_MODE_RIT) {
+                    changeFrequency(0, false);
+                }
+                displaySMeterOrMode(true);
+            }
+        }
 
-		if((buttonLockPressed() == BUTTON_STATUS_PRESSED) && (!fastMode)) {
-			lockMode = !lockMode;
-			if(!lockMode) {
-				// discard any changes in counters
-				(void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
-				(void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-			}
-			displaySMeterOrMode(true);
-		} else if(!lockMode) {
-			if((buttonBandPressed() == BUTTON_STATUS_PRESSED) && (!fastMode)) {
-				loopBand();
-				// discard any changes in counters
-				(void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
-				(void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-			} else if(buttonFastPressed() == BUTTON_STATUS_PRESSED) {
-				fastMode = !fastMode;
-				if(!fastMode) {
-					// discard any changes in counters
-					(void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
-					(void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-				}
-				displaySMeterOrMode(true);
-			} else if(buttonClarPressed() == BUTTON_STATUS_PRESSED) {
-				if(clarMode == CLAR_MODE_DISABLED) {
-					clarMode = currClarModeRit ? CLAR_MODE_RIT : CLAR_MODE_XIT;
-				} else {
-					clarMode = CLAR_MODE_DISABLED;
-					changeFrequency(0, false);
-				}
-				clarOffset = 0;
-				(void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-				displaySMeterOrMode(true);
-			} else if(buttonKeyerPressed() == BUTTON_STATUS_PRESSED) {
-				loopKeyer();
-				// discard any changes in counters
-				(void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
-				(void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
-			}
-		}
+        if((buttonLockPressed() == BUTTON_STATUS_PRESSED) && (!fastMode)) {
+            lockMode = !lockMode;
+            if(!lockMode) {
+                // discard any changes in counters
+                (void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+                (void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+            }
+            displaySMeterOrMode(true);
+        } else if(!lockMode) {
+            if((buttonBandPressed() == BUTTON_STATUS_PRESSED) && (!fastMode)) {
+                loopBand();
+                // discard any changes in counters
+                (void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+                (void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+            } else if(buttonFastPressed() == BUTTON_STATUS_PRESSED) {
+                fastMode = !fastMode;
+                if(!fastMode) {
+                    // discard any changes in counters
+                    (void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+                    (void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+                }
+                displaySMeterOrMode(true);
+            } else if(buttonClarPressed() == BUTTON_STATUS_PRESSED) {
+                if(clarMode == CLAR_MODE_DISABLED) {
+                    clarMode = currClarModeRit ? CLAR_MODE_RIT : CLAR_MODE_XIT;
+                } else {
+                    clarMode = CLAR_MODE_DISABLED;
+                    changeFrequency(0, false);
+                }
+                clarOffset = 0;
+                (void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+                displaySMeterOrMode(true);
+            } else if(buttonKeyerPressed() == BUTTON_STATUS_PRESSED) {
+                loopKeyer();
+                // discard any changes in counters
+                (void)getDelta(&htim1, &prevMainCounter, MAIN_DELTA_MULT, MAIN_DELTA_DIV);
+                (void)getDelta(&htim2, &prevMultiCounter, MULTI_DELTA_MULT, MULTI_DELTA_DIV);
+            }
+        }
 
-		if((clarMode == CLAR_MODE_DISABLED) && (!lockMode) && (!fastMode)) {
-			displaySMeterOrMode(false);
-		}
-	}
+        if((clarMode == CLAR_MODE_DISABLED) && (!lockMode) && (!fastMode)) {
+            displaySMeterOrMode(false);
+        }
+    }
 
     HAL_Delay(5);
 }
 
 void init() {
 /*
-	// Code for determining the correction factor for Si5351
+    // Code for determining the correction factor for Si5351
     char calmsg[16];
 
     LCD_Init();
@@ -979,64 +979,64 @@ void init() {
     snprintf(calmsg, sizeof(calmsg), "Cal; CH%d", CH_CAL);
     LCD_SendString(calmsg);
 
-	si5351_Init(0);
-	si5351PLLConfig_t pll_conf;
-	si5351OutputConfig_t out_conf;
-	int32_t Fclk = 10000000;
+    si5351_Init(0);
+    si5351PLLConfig_t pll_conf;
+    si5351OutputConfig_t out_conf;
+    int32_t Fclk = 10000000;
 
-	si5351_Calc(Fclk, &pll_conf, &out_conf);
-	si5351_SetupPLL(SI5351_PLL_A, &pll_conf);
-	si5351_SetupOutput(CH_CAL, SI5351_PLL_A, SI5351_DRIVE_STRENGTH_4MA, &out_conf);
-	si5351_EnableOutputs(1<<CH_CAL);
+    si5351_Calc(Fclk, &pll_conf, &out_conf);
+    si5351_SetupPLL(SI5351_PLL_A, &pll_conf);
+    si5351_SetupOutput(CH_CAL, SI5351_PLL_A, SI5351_DRIVE_STRENGTH_4MA, &out_conf);
+    si5351_EnableOutputs(1<<CH_CAL);
 
-	while(1) {
-		HAL_Delay(100);
-	}
+    while(1) {
+        HAL_Delay(100);
+    }
 */
-	keyUp();
+    keyUp();
 
-	// Give the LCD and Si5351 some time to initialize after powering up
-	HAL_Delay(1000);
+    // Give the LCD and Si5351 some time to initialize after powering up
+    HAL_Delay(1000);
 
-	HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
-	HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
-	HAL_ADC_Start(&hadc1);
+    HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
+    HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
+    HAL_ADC_Start(&hadc1);
 
     LCD_Init();
     LCD_Goto(0, 0);
     LCD_SendString(" HBR/3B ");
     LCD_Goto(1, 0);
     LCD_SendString("Jul 2022");
-	HAL_Delay(1000);
+    HAL_Delay(1000);
     LCD_Clear();
 
     LCD_Goto(0, 0);
     LCD_SendString("I2C:  ");
     bool first_line = true;
     for(uint16_t i = 1; i < 128; i++) {
-		HAL_StatusTypeDef res;
+        HAL_StatusTypeDef res;
         res = HAL_I2C_IsDeviceReady(&hi2c1, i << 1, 1, 10);
         if(res == HAL_OK) {
             char msg[64];
             snprintf(msg, sizeof(msg), "%02X ", i);
-    		LCD_SendString(msg);
-    		if(first_line) {
-    			LCD_Goto(1, 0);
-    			first_line = false;
-    		}
+            LCD_SendString(msg);
+            if(first_line) {
+                LCD_Goto(1, 0);
+                first_line = false;
+            }
         }
     }  
-	HAL_Delay(1000);
+    HAL_Delay(1000);
     LCD_Clear();
 
     loadKeyerConfig();
-	displaySMeterOrMode(true);
+    displaySMeterOrMode(true);
 
-	si5351_Init(si5351_correction);
-	changeBand(0); // calls changeFrequency()
+    si5351_Init(si5351_correction);
+    changeBand(0); // calls changeFrequency()
 
-	inTransmitMode = true;
-	ensureReceiveMode();
+    inTransmitMode = true;
+    ensureReceiveMode();
 }
 
 /* USER CODE END 0 */
