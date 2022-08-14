@@ -454,7 +454,7 @@ void displaySMeterOrMode(bool force) {
     }
 
     uint32_t tstamp = HAL_GetTick();
-    if(force || (tstamp - lastSMeterUpdateTime > 250)) {
+    if(force || (tstamp - lastSMeterUpdateTime > 500)) {
         const char* sValue = NULL;
         double voltage = ADC_ReadVoltage(ADC_CHANNEL_2);
 
