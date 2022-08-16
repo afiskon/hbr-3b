@@ -338,14 +338,15 @@ void changeKeyerSpeed(int32_t delta) {
     if(keyerConfig.speedWPM < 10) {
         keyerConfig.speedWPM = 9;
         keyerConfig.straightKey = true;
-        keyerConfig.ditTimeMs = 60*1000/(50*15); // as for 15 WPM
+        keyerConfig.ditTimeMs = 60*1000/(50*16); // as for 16 WPM
     } else {
         keyerConfig.straightKey = false;
         if(keyerConfig.speedWPM > 30) {
             keyerConfig.speedWPM = 30;
         }
 
-        keyerConfig.ditTimeMs = 60*1000/(50*keyerConfig.speedWPM);
+        /* +1 compensates the signal rise/fall time */
+        keyerConfig.ditTimeMs = 60*1000/(50*(keyerConfig.speedWPM + 1));
     }
 }
 
@@ -426,6 +427,14 @@ void displayFrequency() {
     LCD_SendString(buff);
 }
 
+bool buttonDitPressed() {
+    return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12) == GPIO_PIN_RESET);
+}
+
+bool buttonDahPressed() {
+    return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13) == GPIO_PIN_RESET);
+}
+
 void displaySMeterOrMode(bool force) {
     static const char* prevSValue = NULL;
     static uint32_t lastSMeterUpdateTime = 0;
@@ -479,8 +488,11 @@ void displaySMeterOrMode(bool force) {
         }
 
         if(force || (prevSValue != sValue)) {
-            LCD_Goto(1, 0);
-            LCD_SendString(sValue);
+            // Don't re-render the S-meter if we are about to transmit
+            if(!buttonDitPressed() && !buttonDahPressed()) {
+                LCD_Goto(1, 0);
+                LCD_SendString(sValue);
+            }
         }
 
         prevSValue = sValue;
@@ -578,14 +590,6 @@ ButtonStatus_t buttonPressed(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, uint32_t* l
         }
     }
     return BUTTON_STATUS_RELEASED;
-}
-
-bool buttonDitPressed() {
-    return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12) == GPIO_PIN_RESET);
-}
-
-bool buttonDahPressed() {
-    return (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13) == GPIO_PIN_RESET);
 }
 
 bool switchRitMode() {
@@ -737,7 +741,7 @@ void loopKeyer() {
             }
         } else {
             uint32_t tstamp = HAL_GetTick();
-            if(tstamp - CWTrainerModeEnterTime > keyerConfig.ditTimeMs*10) {
+            if(tstamp - CWTrainerModeEnterTime > keyerConfig.ditTimeMs*8) {
                 leaveCWTrainerMode();
             }
         }

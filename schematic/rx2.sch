@@ -831,45 +831,8 @@ F 3 "~" H 9700 2200 50  0001 C CNN
 	1    9700 2200
 	0    -1   -1   0   
 $EndComp
-$Comp
-L Device:R R?
-U 1 1 62D7544D
-P 10150 2200
-AR Path="/62C0C022/62D7544D" Ref="R?"  Part="1" 
-AR Path="/62CCEF11/62D7544D" Ref="R27"  Part="1" 
-F 0 "R27" V 9943 2200 50  0000 C CNN
-F 1 "3.3K" V 10034 2200 50  0000 C CNN
-F 2 "" V 10080 2200 50  0001 C CNN
-F 3 "~" H 10150 2200 50  0001 C CNN
-	1    10150 2200
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:C C75
-U 1 1 62D7598D
-P 10400 2550
-F 0 "C75" H 10515 2596 50  0000 L CNN
-F 1 "47n" H 10515 2505 50  0000 L CNN
-F 2 "" H 10438 2400 50  0001 C CNN
-F 3 "~" H 10400 2550 50  0001 C CNN
-	1    10400 2550
-	1    0    0    -1  
-$EndComp
-Text GLabel 10600 2200 2    50   Output ~ 0
+Text GLabel 10550 2200 2    50   Output ~ 0
 AFAMP_IN
-$Comp
-L power:GND #PWR?
-U 1 1 62D76BC9
-P 10400 2800
-AR Path="/62C0C022/62D76BC9" Ref="#PWR?"  Part="1" 
-AR Path="/62CCEF11/62D76BC9" Ref="#PWR0104"  Part="1" 
-F 0 "#PWR0104" H 10400 2550 50  0001 C CNN
-F 1 "GND" H 10405 2627 50  0001 C CNN
-F 2 "" H 10400 2800 50  0001 C CNN
-F 3 "" H 10400 2800 50  0001 C CNN
-	1    10400 2800
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7650 2450 7750 2450
 Wire Wire Line
@@ -919,17 +882,6 @@ Wire Wire Line
 Connection ~ 9250 2200
 Wire Wire Line
 	9250 2200 9250 2100
-Wire Wire Line
-	9850 2200 10000 2200
-Wire Wire Line
-	10300 2200 10400 2200
-Wire Wire Line
-	10400 2200 10400 2400
-Connection ~ 10400 2200
-Wire Wire Line
-	10400 2200 10600 2200
-Wire Wire Line
-	10400 2700 10400 2800
 Wire Wire Line
 	9250 2950 9250 2800
 Wire Wire Line
@@ -1073,8 +1025,6 @@ Wire Wire Line
 	1800 6000 1800 5850
 Wire Wire Line
 	1800 5550 1800 5250
-Wire Wire Line
-	1800 5250 1600 5250
 $Comp
 L Amplifier_Audio:LM386 U8
 U 1 1 62DBFEF1
@@ -1507,23 +1457,73 @@ Text Notes 8250 3850 0    50   ~ 0
 LM386 sounds very loud when used with a proper driver.
 Text Notes 2000 2600 0    50   ~ 0
 High-Q (>= 100 000) crystals are required to get\na narrowband CW filter with low losses. The crystals\nshould be measured using G3UUR method and\nmatched by the resonant frequency. Use LTspice\nto find the right capacitance for your crystals.
-Text GLabel 10600 1400 2    50   Output ~ 0
+Text GLabel 10650 1600 2    50   Output ~ 0
 S_METER_IN
 $Comp
 L Device:C C70
 U 1 1 6310FC29
-P 10400 1800
-F 0 "C70" H 10515 1846 50  0000 L CNN
-F 1 "22n" H 10515 1755 50  0000 L CNN
-F 2 "" H 10438 1650 50  0001 C CNN
-F 3 "~" H 10400 1800 50  0001 C CNN
-	1    10400 1800
+P 10350 1900
+F 0 "C70" H 10465 1946 50  0000 L CNN
+F 1 "22n" H 10465 1855 50  0000 L CNN
+F 2 "" H 10388 1750 50  0001 C CNN
+F 3 "~" H 10350 1900 50  0001 C CNN
+	1    10350 1900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10400 2200 10400 1950
+	10350 2200 10350 2050
 Wire Wire Line
-	10400 1650 10400 1400
+	10350 1750 10350 1600
 Wire Wire Line
-	10400 1400 10600 1400
+	10350 1600 10650 1600
+Wire Wire Line
+	1600 5250 1800 5250
+$Comp
+L Device:R R?
+U 1 1 62FE865F
+P 10100 2200
+AR Path="/62C0C022/62FE865F" Ref="R?"  Part="1" 
+AR Path="/62CCEF11/62FE865F" Ref="R27"  Part="1" 
+F 0 "R27" V 9893 2200 50  0000 C CNN
+F 1 "3.3K" V 9984 2200 50  0000 C CNN
+F 2 "" V 10030 2200 50  0001 C CNN
+F 3 "~" H 10100 2200 50  0001 C CNN
+	1    10100 2200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C75
+U 1 1 62FE8669
+P 10350 2500
+F 0 "C75" H 10465 2546 50  0000 L CNN
+F 1 "47n" H 10465 2455 50  0000 L CNN
+F 2 "" H 10388 2350 50  0001 C CNN
+F 3 "~" H 10350 2500 50  0001 C CNN
+	1    10350 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 62FE8673
+P 10350 2800
+AR Path="/62C0C022/62FE8673" Ref="#PWR?"  Part="1" 
+AR Path="/62CCEF11/62FE8673" Ref="#PWR0104"  Part="1" 
+F 0 "#PWR0104" H 10350 2550 50  0001 C CNN
+F 1 "GND" H 10355 2627 50  0001 C CNN
+F 2 "" H 10350 2800 50  0001 C CNN
+F 3 "" H 10350 2800 50  0001 C CNN
+	1    10350 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 2200 10350 2200
+Wire Wire Line
+	10350 2200 10350 2350
+Connection ~ 10350 2200
+Wire Wire Line
+	10350 2650 10350 2800
+Wire Wire Line
+	9950 2200 9850 2200
+Wire Wire Line
+	10350 2200 10550 2200
 $EndSCHEMATC
