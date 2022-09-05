@@ -13,3 +13,6 @@ QRP CW Transceiver
 * ~5W class C power amplifier
 * Has a S-meter and a SWR meter
 * Open-source firmware, schematic and 3D-printable enclosure
+
+Article (in Russian): https://eax.me/hbr-3b-transceiver/
+Demo: https://www.youtube.com/watch?v=xab1Q_SXZec
