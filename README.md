@@ -16,5 +16,5 @@ QRP CW Transceiver
 
 Links
 
-* Article (in Russian): https://eax.me/hbr-3b-transceiver/
+* Article (in Russian): https://eax.me/2022/2022-09-05-hbr-3b-transceiver.html
 * Demo: https://www.youtube.com/watch?v=xab1Q_SXZec
