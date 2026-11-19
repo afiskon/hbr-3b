@@ -3,7 +3,7 @@
 QRP CW Transceiver
 
 * Covers 30, 17, and 12 meters
-* Easily modifiable for other 3 bands or [all 8 HF bands](https://github.com/afiskon/hbr-8b)
+* Easily modifiable for other 3 bands or [all 8 HF bands](https://eax.me/2023/2023-02-13-hbr-8b-transceiver.html)
 * Classical single IF superheterodyne design
 * Free of spurious signals!
 * Simple but effective AGC
